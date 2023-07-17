@@ -1,0 +1,17 @@
+server:
+  port: 8012
+
+spring:
+  application:
+    name: dubbo-interface-boot-consumer
+
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    timeout: 2000
+    protocol: -1
+    port: -1
+
+

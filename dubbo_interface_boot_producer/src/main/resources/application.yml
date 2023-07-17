@@ -1,0 +1,38 @@
+server:
+  port: 8011
+
+spring:
+  application:
+    name: dubbo-interface-boot-producer
+    #配置数据源信息
+  datasource:
+    #配置连接数据库的各个信息
+    driver-class-name: com.mysql.jdbc.Driver
+    #设置字符集
+    url: jdbc:mysql://127.0.0.1:3306/localhosttest?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+    username: root
+    password: admin123
+
+
+mybatis-plus:
+  #配置类型别名所对应的包
+  type-aliases-package: com.interfaceboot.api.entity
+  #配置SQL输出语句com.winsun.dataclean.mapper
+  mapper-locations: com/interfaceboot/producer/mapper/*.xml
+
+
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    timeout: 2000
+    protocol: -1
+    port: -1
+  protocol:
+    name: dubbo
+    port: 20890
+  # 扫描 @DubboService 注解
+  scan:
+    base-packages: com.interfaceboot.producer.service.impl
+
